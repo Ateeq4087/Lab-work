@@ -1,0 +1,2428 @@
+TESTING
+
+Frameworks for Automation Testing (.Net + Angular Stack)
+UNIT TESTING
+Role: Test Developer
+Technique: White Box Testing
+1. Unit Testing Frameworks
+     .Net : MSTests, NUnit, XUnit
+   Angular: Jasmine + Karma
+
+INTEGRATION TESTING
+Role: Sr. Developer
+Technique: Grey Box Testing
+2. Integration Testing Frameworks
+     .Net : Moq + (Nunit | XUnit | MsTest)
+   Angular: Angular Mocks (ngTesting module) + jasmine
+
+E2E TESTING
+Role: QA
+Technique: Black Box Testing
+3. E2E Testing Frameworks
+     .Net : Selenium + (NUnit | XUnit | MsTest)
+   Angular: Selenium + Protractor
+
+---------------------------------------------------------------------------------------------------------------------
+
+SampleApp for RxJs: https://we.tl/t-6TbP2JSaya
+
+ 
+
+Reading Material: Bootstrap Cheatsheet: https://getbootstrap.com/docs/5.3/getting-started/introduction/
+
+Reading Material RxJs Operators Cheatsheet: https://www.w3resource.com/angular/the-rxjs-library.php
+
+Reading Material Angular: https://www.w3resource.com/angular/getting-started-with-angular.php
+
+ 
+
+Communication between components
+
+1. @Input, @Output to share properties and events from component to other components
+2. Access child component's typscript properties which are shared. @ViewChild(yourChildComponent) child
+3. Access the projected content of the child component. @ChildContent()
+
+ 
+
+Using Http:
+
+1. In app.module.ts     
+
+          import {HttpClientModule } from '@angular/common/http';
+    Add it to the "imports" section of @NgModule
+ 
+
+2. In the service / component where it should be used, import and inject it.
+        import { HttpClient } from '@angular/common/http';
+        Inject it in the constructor
+          constructor(private http:HttpClient){}
+ 
+
+Navigating to another component from ts file.
+1. In the required component / service
+       import { Router } from '@angular/router';
+2. Inject in the constructor
+       constructor(private router:Router){}
+3. In the required function,
+       this.router.navigateByUrl('your/route')
+ 
+
+Add a guarded Route
+1. Create a new service that implements CanActivate Interface
+      export class yourService implements CanActivate{
+                
+canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
+              ... your code here ...
+            return true / false;
+      }
+ 
+
+2. Add this service in app.routing module
+      routes:Routes = [
+                   {path:'', Component: yourComponent, canActivate:[YourService]}
+]
+----------------------------------------------------------------------------------------------------------------------
+
+da061c20eb59ef2733a19a2801a874f3.png
+
+ 
+
+TS = Javascript + Extras
+Extras: class, interface, access-specifiers, inheritance, implementation of interfaces, generics
+- TS compiler - TSC - Angular's webpack bundler invokes the compiler
+ 
+
+TSC compiler does not produce binary output
+Hence, tsc is known as transpiler
+---------------------------------
+Lab - Angular
+1. Create a pipe called reverse
+2. Create a component called NameReverse
+<input type="text" [(ngModel)]="name"/>
+<span>{{name | reverse}}</span>
+ 
+
+Routing  in angular: Provide a uri. If uri matches, redirect to appropriate component
+Redirect: Unload existing component from app.component.html, then load the correct component in its place
+ 
+
+Steps for Routing
+1. Add configuration to app-routing.module.ts
+{path:'somepath/abc', Component:AppComponent}
+ 
+
+2. Add configuration to container component.In our case it is app.component.html
+- Add the router-outlet tag <router-outlet></router-outlet>
+ 
+
+Client Side Technologies
+ - HTML, JS, CSS based technologies
+ - Polymer is a language that compiles to HTML
+ - Typescript, ES are languages that compile to Javascript
+ - LESS, SASS are languages that compile to CSS
+ 
+
+Angular is a client technology
+ - It uses HTML5, Typescript and a choice of CSS language between CSS, LESS and SASS
+ 
+
+ - Uses Typescript which Compiles (known as transpilation) to Javscript
+ 
+
+Angular - the framework contains NO exe files. It only contains js, ts files
+Hence windows installer cannot be used to install angular.
+A new installer called NPM - Node Package Manager will be used
+ 
+
+Asp.net Core                                                                   Angular
+ 
+
+1. Config file                                                                   1. Config file
+     appsettings.json                                                           package.json - app level config
+     web.config                                                                    angular.json - angular config
+                                                                                          tsconfig.json - Typescript config
+                                                                                          karma.conf.js - Karma + Jasmine Config
+                                                                                          protractor.conf.js - Protractor config
+ 
+
+2. Uses Language Compiler                                           2. Use Bundler, as there more than one languages used                                                                                             in a single app
+    C# - Roslyn                                                                            Webpack
+                                                                                                 - Bundles all compiled outputs together,
+                                                                                                     bootstraps it,  gives to browser
+ 
+
+----------------------------------------------------------------------------------------
+Angular Components: These are programmable graphical UI controls, which can be embedded inside index.html
+> ng generate component C1
+ 
+
+Angular Class: >ng generate class person
+ 
+
+C# Class                                                                         Typescript Class
+ 
+
+Shareable class                                                             Shareable class / entity
+Use: public keyword                                                         Use: export keyword
+ 
+
+Printing                                                                         Printing
+$"your text {variable}"                                                    `your text ${variable}`
+----------------------------------------------------------------------------------------
+Databinding techniques
+ 
+
+1. {{}} - Interpolation : Whatever is added within this binding, will get evaluated
+2. [] - Bind data in one direction - TS -> HTML
+- Assign values from TS file then bind to HTML file
+- Properties / variables / functions
+3. () - Bind data in one direction - HTML -> TS
+- Event Binding
+- Binding Angular events like click, dblClick, keypress,....
+4. [()] - Bi-directional binding done simultaneously
+5. *  - Pass the binding to children of the html tag
+-------------------------------------------------------------------------------------------
+Observations from creating components
+ 
+
+1. Created component, then added our component to app.component.html. 
+   Hence, app.component.html is known as the container component. A component that can contain other components.
+ 
+
+2. To display any value on html, we use databinding techniques.Add a property / method in TS file, then use any of the binding
+   techniques.
+-----------------------------------------------------------------------------------------------------------------------
+
+Working with Github for projects
+
+How to approach:
+
+1.  Talk within team, get all features and information
+
+2. Create the DAL layer using EF
+
+3. Perform a migration to the SQL server database
+
+4. Based on the features, create the functions in BL. BL will have the reference of DAL project
+
+5. Web Api will expose your BL functions to the PL layer. Here, add a reference to the BL project.
+
+6. PL project will be an MVC App. The MVC App will call the web api using Restsharp nuget package. Refer to our WebApiClients folder -> ConsoleClient Project.
+
+ 
+
+How to Collaborate on Github
+
+1. One person create the github repo. Click on the created Repo, find the settings icon and click on it-> Add Collaborators
+
+489e7e9194344791f66d6b3bc8f4f6d4.png
+
+ 
+
+ac4e15a4d54f3e5a4d68dbf5850e1b27.png
+
+Reading Material: https://inspireinnovativelearning.blogspot.com/2023/11/using-git-from-visual-studio.html
+
+---------------------------------------------------------------------------------------------------------------------
+
+Asynchronous Programming
+
+ 
+
+Reading Material: https://inspireinnovativelearning.blogspot.com/2021/06/symphony-with-asynchrony-c.html
+
+ 
+
+ 
+
+---------------------------------------------------------------------------------------------------------------------
+
+Reading Material: https://portswigger.net/web-security/cross-site-scripting
+
+                             https://github.com/sampradan-labs/AuthenticationUsingMVCWebApi
+
+ 
+
+How to execute a TBA enabled Web Api
+
+ 
+
+The Client refers to an application / project / website that accesses a web api
+
+Each client has its own way of processing the token.
+
+Eg: Postman uses Request Header: Authorization
+
+      Console App use RestSharp apis to create Authorization header
+
+      Angular / Jquery / any JS based application uses  Web Storage (Local Storage) / cookies to work with tokens
+
+ 
+
+46357a1e07076cecf892a16da4a3ff4c.png
+
+46a6e6a0dd8113d016795bff399e1ade.png
+
+ 
+
+Token Based Authentication Steps
+
+ 
+
+Authentication handler in ASP.Net Core (JWT and Custom)
+
+ 
+
+Authentication is the process that helps identify who is the users. On the other hand, authorization is the process of determining what a user can do. For authorization to work, the user will be authenticated first. We need the user’s identity to identify the role of a user and act accordingly.
+
+Authentication middleware is responsible for authentication in ASP.Net Core applications. The authentication middleware uses the registered authentication handlers to authenticate a user. The registered handlers and their associated configurations are called schemes.
+
+In ASP.Net Core, the authentication middleware is added in the Startup class, inside the Configure method. It is done by calling UseAuthentication method on the IApplicationBuilder instance passed to the method.
+
+Authentication schemes are registered in the Startup class inside of the ConfigureServices method. It is done by calling AddAuthentication method on the IServiceCollection instance passed to the method. We can register multiple authentication schemes, whereas only one of them will be a default scheme.
+
+Authentication Scheme and Handler
+
+As I mentioned above, the scheme is nothing but the index of a handler and its configuration. A scheme is a mechanism for referring an authentication, the challenge (how to challenge a request if authentication fails) and forbid behavior (how to react when authorization of a user fails).
+
+The configuration method for AddAuthentication provides a way to configure the default scheme. We will show it in detail later.
+
+An authentication handler is a class, where we will define how to react to a specific scheme. To implement a handler, we will either have to implement the interface IAuthenticationHandler or derive from class AuthenticationHandler<TOptions>.
+
+Inside the handler, we can use our own logic for authenticating a user.
+
+ 
+
+Creating a Web API Application
+
+To demonstrate the feature, I will create a ASP.Net Core Web API application. The application will have a simple name API, which will return names of few states. But to access the API the caller will first authenticate using a /name/authenticate API endpoint.
+
+To create a new ASP.Net Core Web API application, I will use Visual Studio 2019. After opening Visual Studio 2019, I will click on “Create a new project” option.
+
+From the list of project templates, I will select “ASP.NET Core Web Application”. And create a new project named “Auth.Demo”. After that, I will select “API” as the type of project and will keep Docker enable. And, I will use ASP.NET Core 3.0.
+
+Once the project is created, I will create a new API to authenticate. But firstly, I will delete the auto-generated classes WeatherForecast and WeatherForecastController.
+
+Creating Name API
+
+Firstly, I will create a new API, by right-clicking the “Controllers” folder, then selecting “Add -> Controller” menu option.
+
+Secondly, when the Add New item popup appears, I will select the “API Controller with read/write actions” option.
+
+Finally, I will name the controller as “NameController”. From the auto-generated controller class, I will delete the code for Post, Put and Delete methods, as they are not relevant for this example.
+
+1
+
+2
+
+3
+
+4
+
+5
+
+6
+
+7
+
+8
+
+9
+
+10
+
+11
+
+12
+
+13
+
+14
+
+15
+
+16
+
+17
+
+18
+
+19
+
+20
+
+21
+
+22
+
+23
+
+24
+
+using System.Collections.Generic;
+
+using Microsoft.AspNetCore.Mvc;
+
+ 
+
+namespace Auth.Demo.Controllers
+
+{
+
+    [Route("api/[controller]")]
+
+    [ApiController]
+
+    public class NameController : ControllerBase
+
+    {
+
+        // GET: api/Name
+
+        [HttpGet]
+
+        public IEnumerable<string> Get()
+
+        {
+
+            return new string[] { "value1", "value2" };
+
+        }
+
+ 
+
+        // GET: api/Name/5
+
+        [HttpGet("{id}", Name = "Get")]
+
+        public string Get(int id)
+
+        {
+
+            return "value";
+
+        }
+
+    }
+
+}
+
+Create the Authenticate method
+
+Inside of the NameController class, I will create a new HTTP POST method named Authenticate. This method will accept the UserCred object parameter from the body of the POST request.
+
+The UserCred class contain two properties Username and Password.
+
+1
+
+2
+
+3
+
+4
+
+5
+
+6
+
+7
+
+8
+
+9
+
+10
+
+11
+
+[HttpPost("authenticate")]
+
+public IActionResult Authenticate([FromBody] UserCred userCred)
+
+{
+
+    return Ok();
+
+}
+
+ 
+
+public class UserCred
+
+{
+
+    public string Username { get; set; }
+
+    public string Password { get; set; }
+
+}
+
+But before we proceed further to implement the Authenticate method, let us first configure Startup class to wire up the authentication middleware.
+
+Wiring up Startup for authentication middleware
+
+Firstly, inside the Startup classes Configure method, I will call UseAuthentication extension method on the IApplicationBuilder instance. I will call this method just above the call of UseAuthorization.
+
+1
+
+2
+
+3
+
+4
+
+5
+
+6
+
+7
+
+8
+
+9
+
+10
+
+11
+
+12
+
+13
+
+14
+
+15
+
+16
+
+17
+
+public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+
+{
+
+    if (env.IsDevelopment())
+
+    {
+
+        app.UseDeveloperExceptionPage();
+
+    }
+
+ 
+
+    app.UseRouting();
+
+ 
+
+    app.UseAuthentication();
+
+    app.UseAuthorization();
+
+ 
+
+    app.UseEndpoints(endpoints =>
+
+    {
+
+        endpoints.MapControllers();
+
+    });
+
+}
+
+At this point, I have asked the .Net Core to use authentication, but have not provided any authentication schemes yet. But before we do that, we have to consider how everything will play out.
+
+Once a user is authenticated, we will let the authorizer determine if the Identity created is allowed to access a particular resource or not. For this example, we will not have any authorization, we will let all authenticated users have access to all resources.
+
+Post authentication, we will send a token back to the caller, using which the caller will make subsequent resource calls. This token generation and lifetime management process can be custom. Or we can use something like JWT.
+
+What is JWT
+
+JWT stands for JSON Web Token. JWT is JSON based access token created for claims. It is a self-contained and compact standard for an access token to securely transfer claims.
+
+For our project, we will use JWT. For creating a JWT, we can use different hash algorithms. We will use HS256 algorithm for this project.
+
+Adding Authentication
+
+Now, I will update the Startup class to call the extension method AddAuthentication of IServiceCollection instance inside of the ConfigureServices method. I will add NuGet package “Microsoft.AspNetCore.Authentication” to enable JWT.
+
+1
+
+2
+
+3
+
+4
+
+5
+
+6
+
+7
+
+8
+
+9
+
+10
+
+11
+
+12
+
+13
+
+14
+
+15
+
+16
+
+17
+
+18
+
+19
+
+20
+
+var tokenKey = Configuration.GetValue<string>("TokenKey");
+
+var key = Encoding.ASCII.GetBytes(tokenKey);
+
+ 
+
+services.AddAuthentication(x =>
+
+{
+
+    x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+
+    x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+
+})
+
+.AddJwtBearer(x =>
+
+{
+
+    x.RequireHttpsMetadata = false;
+
+    x.SaveToken = true;
+
+    x.TokenValidationParameters = new TokenValidationParameters
+
+    {
+
+        ValidateIssuerSigningKey = true,
+
+        IssuerSigningKey = new SymmetricSecurityKey(key),
+
+        ValidateIssuer = false,
+
+        ValidateAudience = false
+
+    };
+
+});
+
+Configuration file below:
+
+1
+
+2
+
+3
+
+4
+
+5
+
+6
+
+7
+
+8
+
+9
+
+10
+
+11
+
+{
+
+  "TokenKey": "This is my test private key",
+
+  "Logging": {
+
+    "LogLevel": {
+
+      "Default": "Information",
+
+      "Microsoft": "Warning",
+
+      "Microsoft.Hosting.Lifetime": "Information"
+
+    }
+
+  },
+
+  "AllowedHosts": "*"
+
+}
+
+In the above code, first, inside of the AddAuthentication method, I am setting the default authentication and challenge scheme as JwtBearerDefaults.AuthenticationScheme.
+
+Secondly, I am calling the AddJwtBearer extension method. And inside of the code I am setting the IssuerSigningKey using the string key “This is my test private key” from the configuration file. The AddJwtBearer will handle all requests and will check for a valid JWT Token in the header. If it is not passed, or the token is expired, it will generate a 401 Unauthorized HTTP response.
+
+Authentication Manager
+
+Next, I am going to implement the authentication manager which will handle authentication of users.
+
+1
+
+2
+
+3
+
+4
+
+5
+
+6
+
+7
+
+8
+
+9
+
+10
+
+11
+
+12
+
+13
+
+14
+
+15
+
+16
+
+17
+
+18
+
+19
+
+20
+
+21
+
+22
+
+23
+
+24
+
+25
+
+26
+
+27
+
+28
+
+29
+
+30
+
+31
+
+32
+
+33
+
+34
+
+35
+
+36
+
+37
+
+38
+
+39
+
+40
+
+41
+
+42
+
+43
+
+44
+
+45
+
+46
+
+47
+
+48
+
+49
+
+50
+
+51
+
+52
+
+53
+
+54
+
+55
+
+using Microsoft.IdentityModel.Tokens;
+
+using System;
+
+using System.Collections.Generic;
+
+using System.IdentityModel.Tokens.Jwt;
+
+using System.Linq;
+
+using System.Security.Claims;
+
+using System.Text;
+
+ 
+
+namespace Auth.Demo
+
+{
+
+    public interface IJWTAuthenticationManager
+
+    {
+
+        string Authenticate(string username, string password);
+
+    }
+
+ 
+
+    public class JWTAuthenticationManager : IJWTAuthenticationManager
+
+    {
+
+        IDictionary<string, string> users = new Dictionary<string, string>
+
+        {
+
+            { "test1", "password1" },
+
+            { "test2", "password2" }
+
+        };
+
+ 
+
+        private readonly string tokenKey;
+
+ 
+
+        public JWTAuthenticationManager(string tokenKey)
+
+        {
+
+            this.tokenKey = tokenKey;
+
+        }
+
+ 
+
+        public string Authenticate(string username, string password)
+
+        {
+
+            if (!users.Any(u => u.Key == username && u.Value == password))
+
+            {
+
+                return null;
+
+            }
+
+ 
+
+            var tokenHandler = new JwtSecurityTokenHandler();
+
+            var key = Encoding.ASCII.GetBytes(tokenKey);
+
+            var tokenDescriptor = new SecurityTokenDescriptor
+
+            {
+
+                Subject = new ClaimsIdentity(new Claim[]
+
+                {
+
+                    new Claim(ClaimTypes.Name, username)
+
+                }),
+
+                Expires = DateTime.UtcNow.AddHours(1),
+
+                SigningCredentials = new SigningCredentials(
+
+                    new SymmetricSecurityKey(key),
+
+                    SecurityAlgorithms.HmacSha256Signature)
+
+            };
+
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+
+            return tokenHandler.WriteToken(token);
+
+        }
+
+    }
+
+}
+
+In JWTAuthenticationManager class, I am keeping a constant dictionary of username and password for demo purposes. In a real-life scenario, this information will be saved encrypted in data storage.
+
+Inside the Authenticate method, I am checking against the dictionary if the username and password are available. If they are, then I will create a JWT token using the JWT API which will expire in an hour. And I am using HS256 algorithm for encryption of the token. Also, I am using the same key from the configuration, as I used in the Startup class for configuring JWT handler.
+
+Updating NameController
+
+Finally, I will update NameController class’s Authenticate method to call JWTAuthenticationManager and authenticate the incoming username and password. And send back the generated JWT token.
+
+1
+
+2
+
+3
+
+4
+
+5
+
+6
+
+7
+
+8
+
+9
+
+10
+
+11
+
+12
+
+13
+
+14
+
+15
+
+16
+
+17
+
+18
+
+19
+
+20
+
+21
+
+22
+
+23
+
+24
+
+25
+
+26
+
+27
+
+28
+
+29
+
+30
+
+31
+
+32
+
+33
+
+34
+
+35
+
+36
+
+37
+
+38
+
+39
+
+40
+
+41
+
+42
+
+43
+
+44
+
+45
+
+using System.Collections.Generic;
+
+using Microsoft.AspNetCore.Authorization;
+
+using Microsoft.AspNetCore.Mvc;
+
+ 
+
+namespace Auth.Demo.Controllers
+
+{
+
+    [Authorize]
+
+    [Route("api/[controller]")]
+
+    [ApiController]
+
+    public class NameController : ControllerBase
+
+    {
+
+        private readonly IJWTAuthenticationManager jWTAuthenticationManager;
+
+ 
+
+        public NameController(IJWTAuthenticationManager jWTAuthenticationManager)
+
+        {
+
+            this.jWTAuthenticationManager = jWTAuthenticationManager;
+
+        }
+
+ 
+
+        // GET: api/Name
+
+        [HttpGet]
+
+        public IEnumerable<string> Get()
+
+        {
+
+            return new string[] { "New York", "New Jersey" };
+
+        }
+
+ 
+
+        // GET: api/Name/5
+
+        [HttpGet("{id}", Name = "Get")]
+
+        public string Get(int id)
+
+        {
+
+            return "New Jersey";
+
+        }
+
+ 
+
+        [AllowAnonymous]
+
+        [HttpPost("authenticate")]
+
+        public IActionResult Authenticate([FromBody] UserCred userCred)
+
+        {
+
+            var token = jWTAuthenticationManager.Authenticate(userCred.Username, userCred.Password);
+
+             
+
+            if (token == null)
+
+                return Unauthorized();
+
+             
+
+            return Ok(token);
+
+        }
+
+    }
+
+}
+
+In the above code if the token returned is null, I am sending an Unauthorized response back. Else sending a Ok response with the JWT token generated.
+
+Next, I will update the Startup class to register JWTAuthenticationManager.
+
+1
+
+2
+
+3
+
+4
+
+5
+
+6
+
+7
+
+8
+
+9
+
+10
+
+11
+
+12
+
+13
+
+14
+
+15
+
+16
+
+17
+
+18
+
+19
+
+20
+
+21
+
+22
+
+23
+
+24
+
+25
+
+26
+
+27
+
+28
+
+29
+
+30
+
+31
+
+32
+
+33
+
+34
+
+35
+
+36
+
+37
+
+38
+
+39
+
+40
+
+41
+
+42
+
+43
+
+44
+
+45
+
+46
+
+47
+
+48
+
+49
+
+50
+
+51
+
+52
+
+53
+
+54
+
+55
+
+56
+
+57
+
+58
+
+59
+
+60
+
+61
+
+62
+
+63
+
+64
+
+65
+
+66
+
+67
+
+68
+
+using System.Text;
+
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+
+using Microsoft.AspNetCore.Builder;
+
+using Microsoft.AspNetCore.Hosting;
+
+using Microsoft.Extensions.Configuration;
+
+using Microsoft.Extensions.DependencyInjection;
+
+using Microsoft.Extensions.Hosting;
+
+using Microsoft.IdentityModel.Tokens;
+
+ 
+
+namespace Auth.Demo
+
+{
+
+    public class Startup
+
+    {
+
+        public Startup(IConfiguration configuration)
+
+        {
+
+            Configuration = configuration;
+
+        }
+
+ 
+
+        public IConfiguration Configuration { get; }
+
+ 
+
+        // This method gets called by the runtime. Use this method to add services to the container.
+
+        public void ConfigureServices(IServiceCollection services)
+
+        {
+
+            services.AddControllers();
+
+            var tokenKey = Configuration.GetValue<string>("TokenKey");
+
+            var key = Encoding.ASCII.GetBytes(tokenKey);
+
+ 
+
+            services.AddAuthentication(x =>
+
+            {
+
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+
+            })
+
+            .AddJwtBearer(x =>
+
+            {
+
+                x.RequireHttpsMetadata = false;
+
+                x.SaveToken = true;
+
+                x.TokenValidationParameters = new TokenValidationParameters
+
+                {  
+
+                    ValidateIssuerSigningKey = true,
+
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+
+                    ValidateIssuer = false,
+
+                    ValidateAudience = false
+
+                };
+
+            });
+
+ 
+
+            services.AddSingleton<IJWTAuthenticationManager>(new JWTAuthenticationManager(tokenKey));
+
+        }
+
+ 
+
+        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+
+        {
+
+            if (env.IsDevelopment())
+
+            {
+
+                app.UseDeveloperExceptionPage();
+
+            }
+
+ 
+
+            app.UseRouting();
+
+ 
+
+            app.UseAuthentication();
+
+            app.UseAuthorization();
+
+ 
+
+            app.UseEndpoints(endpoints =>
+
+            {
+
+                endpoints.MapControllers();
+
+            });
+
+        }
+
+    }
+
+}
+
+Finally, I will make an HTTP POST to create a JWT token and use this token to call api/name.
+
+HTTP POST to get tokenHTTP GET to get names
+
+ 
+
+ 
+
+Types of Security
+1. Transport Level Security
+2. Message Level Security
+ 
+
+Solutions to threats
+1. Authentication + Authorization
+2. TLS - Use SSL - Secure Socket Layer (Certificates)
+3. MLS - Hash + Encrypt + Salt + TBA + MFA
+ 
+
+Threats:
+1. XSS Attack - Attach a javascript / Sql Injection in place of Url parameter Or inside the textbox. This will sit in the database. Whenever fetched, the browser evaluates the script, making your system vulnerable
+SOLUTION: MLS - Technique used: Encoding
+  <script>alert("Ha ha")</script> ==> &lt;script&gt;alert("Ha%20%ha")&lt;/script&gt;
+ 
+
+ 
+
+2. CSRF - Cross Site Request Forgery : An intruder intercept http request, acts as if he is genuine user, gets authenticated and misuses information
+SOLUTION: TBA- Token Based Authentication, MFA-Multi-Factor Authentication
+ 
+
+Terminologies Technically
+ 
+
+A user gets identified thru authentication -> Makes a Claim about Permissions -> Challenge is taken up and served
+
+.Net Objects
+Identity Object
+Claims Object
+Challenge Object
+
+Authentication Techniques in .Net Core
+
+1. Individual Accounts - Similar Username + Password stored in DB / object
+2. Windows Authentication - Use OS Credentials to authenticate a webapi / mvc page
+3. OAUTH - Delegate the job of authentication to a Identity provider eg: Google Based Authentication
+4. Token Based Authentication - JSON Web Token - a.k.a JWT token
+
+TBA can be combined with Individual Accounts, Windows Authentication, OAUTH
+
+--------------------------------------------------------------------------------------------------
+ 
+
+Lab - Use Dependency Injection in Web Api
+ 
+
+1. Create the following
+     public interface IAccessories{}
+     public class CarAccessories : IAccessories {}
+2.  In CarController, add IAccessories as a parameter to the constructor
+3. In Program.cs, complete the services registration, using either Singleton or Scoped or Transient option
+---------------------------------------------------------------------------------------------------------------------
+ 
+
+BEST PRACTICES
+Routing Techniques
+ 
+
+1. Configuring Routes inside a collection in Program.cs
+    - The first that matches the pattern will be applied for the route
+2. Attribute Routing: Decorators are used to specify the route
+- Un-named Routes: [HttpGet("/people")]
+- Named Routes: [HttpGet("/persons", Name="RouteName", Order=1)]
+- Named routes are used for re-usability, if a custom http response needs to be created
+   BEST PRACTICES
+   
+1. For MVC application, if there are too many pages, with a standard way of accessing
+Use technique 1 (Traditional technique: Configure in Program.cs)
+2. For Web Api application, go with attribute routing
+Reading Material: https://www.dotnettricks.com/learn/webapi/aspnet-webapi-versioning-strategies-example
+ 
+
+ 
+
+#2 Always use Dependency Injection technique with WebApi, MVC. This is enterprise best practice
+     > Create interfaces, and classes that implement those interfaces
+     > In the controller, create a parameterized constructor
+     > In program.cs, register with a service
+Eg: builder.Services.AddSingleton<IApiLogger, FileApiLogger>()
+    builder.Services.AddScoped<IApiLogger, FileApiLogger>()
+    builder.Services.AddTransient<IApiLogger, FileApiLogger>()
+ 
+
+** AddSingleton: Provides new instance only once in the lifetime of application. If application is stopped and re-run, a new instance will be provided
+ 
+
+** AddTransient: Provides new instance for each call to the class object
+** AddScoped: Provides new instance per api function call.
+-----------------------------------------------------------------------------------------------------------------
+
+df1d698b05902dfdf74ab3c3307b8811.png
+
+ 
+
+ 
+
+Serialization: The process of converting a .Net type to a browser understandable (network understandable) type
+
+De-Serialization: The process of converting browser types (n/w types) to dotnet datatypes
+
+ 
+
+4ad0d899585d1ae2ea8a6d589bce86db.png
+
+-----------------------------------------------------------------------------------------------------------------
+
+Reading Material: Tag Helpers: https://www.telerik.com/blogs/aspnet-core-basics-tag-helpers
+
+ 
+
+LAB - Experimentation to integrate Layered architecture with MVC
+
+ 
+
+Access the functions of EmpBL, which are connected to EmpDal
+
+Eg: GetEmployees(), InsertEmployee(), UpdateEmployee(), DeleteEmploee()
+
+ 
+
+Create corresponding controller actions, views
+
+Observation: The data should be added to Sql Server Emp Database
+
+------------------------------------------------------------------------------------------
+
+LAB - Emp MVC App
+
+ 
+
+1. Create a new Mvc App project inside the EmpSystem -> PL folder
+
+2.  Create a EmployeeController. This controller will have following actions (functions)
+
+      a. GetAllEmployees()
+
+      b. CreateEmployee()
+
+      e. EditEmployee()
+
+3. Create Model class. The properties in Model class will be the same as in EmpLib -> Employee.cs
+
+4. Create a class called EmployeeOperations. Here add the logic to get employees, insert employee etc.
+
+    ** Reference point: PersonOperations.cs
+
+5. Create the relevant views
+
+6. Run the application
+
+---------------------------------------------------------------------------------
+
+MVC MicroLab - Using Scaffolded View Templates
+
+Create the view and code for the following controller action
+
+ 
+
+ [HttpGet("/people/of/age/{startAge}/{endAge}")]
+        public IActionResult GetPeopleWithinAge(int startAge, int endAge)
+        {
+            //Write a new function in PersonOperations Class
+            //Use View Template: List
+                //Create the View
+                //Return the view
+        }
+
+ 
+
+ 
+
+------------------------------------------------------------------------------------------------------------------
+
+ 
+
+Standard Enterprise Level Project Template
+
+ 
+
+d8febe30960405b7faf40900adcc7b47.png
+
+---------------------------------------------------------------------------------
+
+ 
+
+Entity Framework Lab : Expected Learning
+
+Objectives of Diwali Lab
+- todo Code first migration
+- To refactor an already existing product
+ - Already had Console (PL)
+ - Already had EmpLib (BL)
+  - New feature : Add a DAL layer
+---------------------------------------------
+Challenges faced:
+ 
+
+Usage of Generics Or Not??
+ 
+
+Similar class names in different projects == different classes == different datatypes
+ 
+
+Debugging + Errors
+- Null inserts (EmpDAL) 
+- Use ctrl+click to go to the correct
+        - Check if it is marked as [Required]
+- Not marked as [Required], still error
+- Changes made in dal entity class, but not migrated
+- Verify? Check the db -> Designer -> If column is not null
+- Where to add EmpDal as reference? - Confusion
+- EmpDal added as reference to EmpLib
+- EmpLib added as reference to EmpConsole
+53e1229d6ea73ac3a6531abd2e403274.png
+
+Holiday Lab: Develop a DAL layer using Entity framework for EmpSystem. Read about EF, Http Codes in MVC
+
+Reading Material: Using Http Codes in MVC
+
+https://www.codeguru.com/dotnet/http-status-asp-net/
+
+ 
+
+Reading Material for Entity Framework:
+
+https://www.entityframeworktutorial.net/efcore/create-entities.aspx
+
+https://www.entityframeworktutorial.net/efcore/entity-framework-core-dbcontext.aspx
+
+https://www.entityframeworktutorial.net/efcore/db-connection-strings.aspx
+
+https://www.entityframeworktutorial.net/efcore/pmc-commands-for-ef-core-migration.aspx
+
+https://www.entityframeworktutorial.net/efcore/saving-data-in-connected-scenario-in-ef-core.aspx
+
+https://www.entityframeworktutorial.net/efcore/querying-in-ef-core.aspx
+
+ 
+
+ 
+
+Hint: The properties to be used are in the EmpSystem's, BL viz. EmpLib project.
+
+ 
+
+Create the entity classes (classes with properties only) and migrate it to the database
+
+To show your creativity, add functions to the EmpLib project's Employee class such as
+
+    # GetEmployees(){} - Here get all the records from the database and return it as a list. 
+
+    # InsertEmployee(){}, UpdateEmployee(){}, DeleteEmployee(){} - Add these functions inside the EmpLib project's Employee class.
+
+   # From the EmpConsole (our PL), call InsertEmployee(), UpdateEmployee(), DeleteEmployee(), GetEmployees().
+
+** Refer to our TestDal project Demo
+
+ 
+
+ASP.NET
+
+ 
+
+Request: A call made to a website url.
+
+Client: The user who makes a call to the website.
+
+Server: The machine on which a website is deployed
+
+Response: The data in the form of html / xml / json / text / ** returned by the website, for a request made
+
+Eg: Request: Call made to https://google.co.in
+
+      Response: The web page returned by the server
+
+ 
+
+Serialization: Convert .Net types to network understandable types
+
+                     Eg: .Net types to Js types.
+
+                           List<> converted to Js Array type
+
+ 
+
+De-serialization: Convert network types to .Net datatypes
+
+                      Eg: Convert json object to Person datatype in .Net
+
+ 
+
+Technically:
+
+Use Browser Developer tools to understand the technical aspects of a webpage on the browser
+
+Right-Click on on browser page -> Inspect
+
+Elements Tab : Change Html / css code
+
+Console Tab: View Errors / execute random code (in javascript only)
+
+Sources Tab: Used for debugging code
+
+Network Tab: How http protocol operated, the http method used, the response received, http statuses
+
+Application Tab: Look at cookies, sessions, and web storage and also change it
+
+ 
+
+Dig into Http Status Codes
+
+1xx: Request has not yet reached the server (Pending states)
+
+2xx: Success codes
+
+       Eg: 200 - Ok
+
+             201 - Created
+
+3xx: Internal re-direction codes. Also success codes
+
+       Eg: 302: Moved
+
+4xx : Client side error codes. Because of the mistake of the client
+
+        Eg: 404 - Not Found
+
+              401 , 403 : Not authorized, Forbidded access
+
+5xx: Server side errors (especially because of logic errors made by the developer of the website)
+
+        Eg: 500 - Server Error
+
+---------------------------------------------------------------------
+
+Terminologies  related to EF
+
+Models: Class that has only properties
+Models a.k.a DTO
+DTO: Data Transferable Objects
+
+Fluent API: Technique of programming that uses chaining
+
+Class.function().function().function()....
+
+-----------------------------------------------------------------------
+
+Entity Framework DB-First
+
+ 
+
+STEPS:
+
+1. Create a new project
+
+   1.1. Install the packages for Entity Framework Core
+
+         
+
+bc618ddb131e5d75b5e819b761776e28.png
+
+2. Set the project as startup project 
+
+3. Execute the code in Package Manager Console
+
+    >scaffold-dbcontext "Server=(localdb)\MSSQLLocalDB;Database=TestDb;Trusted_Connection=true" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models
+
+---------------------------------------------------------------------------------------------------------------------
+
+ 
+
+Lab: Entity Framework Code-First
+
+ 
+
+1. Create a LabDal project of type ClassLibrary
+2. Follow the LEVEL 1 configuration set up for integrating Entity Framework
+-- Run migrations to db--
+3.  Student has many courses
+ 
+
+4. One course can be applied for by Many students
+5.  One student joins one company
+-- Run migrations to db --
+ 
+
+Configurations for Entity Framework Integration
+LEVEL 1
+ 
+
+Entity Framework Core Integration Steps
+ 
+
+1. Created Class Lib project
+1.1 Install from Nuget Package Manager the following in the dependencies for the project
+a. EntityFrameworkCore
+b. EntityFrameworkCore.SqlServer
+c. EntityFrameworkCore.Design
+d. EntityFrameworkCore.Tools
+2. Created a class TestDbContext : DbContext{}. Inside the class do the following
+2.1. override the method OnConfiguring
+2.2. Add the connection string looking SQL Server Object Explorer
+    optionsBuilder.UseSqlServer("Server=localDb\MSSQLLocalDb; Database=YourDbName; Trusted_Connection=true")
+3. Created domain classes. THese are simple classes with only properties.
+4. Added decorator/annotations to the properties
+5. Every class should have atleast on property decorated with [Key] attribute
+6. Build solution. If errors resolve. 
+7. Open Package Manager Console. Set the default Project as TestDal
+7.1. Create a migration to be updated in the DBMS
+i. >add-migration mig_name
+ii. >update-database mig_name
+ 
+
+LEVEL 2
+1. Add the properties in the context class. In this case TestDbContext class
+     DBSet<YourClass> pluralofYourClass {get;set;}
+2. In Package Manager Console (PMC) run
+    >add-migration mig_name
+    >update-database mig_name
+ 
+
+ 
+
+ 
+
+---------------------------------------------------------------------------------------------------------
+Configure Nuget Sources in .Net
+>Manage Nuget Packages -> Click gear icon on the top right -> Choose '+' button -> https://api.nuget.org/v3/index.json
+ 
+
+Packages to be installed for Entity Framework
+bc618ddb131e5d75b5e819b761776e28.png
+-------------------------------------------------------------------------------------------------------------
+For Reference: Using Lambda Queries
+See Project: EmpConsole of EmpSystem
+//Adding employees to a temporary db - using static List<Employee>
+EmpUtils.EmpDb.Add(Srikar);
+EmpUtils.EmpDb.Add(Vidyasagar);
+EmpUtils.EmpDb.Add(new Employee("AAEEI9382403903SS", "+91 982389799") { Name="Nidha", Designation="Analyst", Salary=600000});
+EmpUtils.EmpDb.Add(new Employee("BBEEI9382403903SS", "+91 982389788") { Name = "Keerthi", Designation = "Analyst", Salary = 600000 });
+EmpUtils.EmpDb.Add(new Employee("CCEEI9382403903SS", "+91 982389777") { Name = "Mahesh", Designation = "Sr Analyst", Salary = 900000 });
+//Get all employees whose aadhar card starts with AA
+
+var resultList = EmpUtils.EmpDb.Where((emp) => emp.Aadhar != null && emp.Aadhar.StartsWith("AA"));
+resultList.ToList().ForEach((emp) => Console.WriteLine($"{emp.Name} | {emp.Aadhar} | {emp.Designation}"));
+
+//Get all employees with salary greater that 6L
+
+ 
+
+----------------------------------------------------------------------------------------------------------
+DELEGATES
+ 
+
+Reading Material: https://inspireinnovativelearning.blogspot.com/2020/06/lambda-expressions-as-generic-delegates.html
+ 
+
+LAB 9 - Delegates Lab
+Work Delegate: accepts string, bool and returns void
+Work("Coding in C#", true)
+
+Print Delegate: accepts a string and Returns a string to be printed
+Print("Dhanush")
+
+UpdateDb Delegate: accepts a string and returns boolean
+UpdateDb("update Employee set isActive=true")
+
+ 
+
+1. Delegate = Function collector
+   Technical definition = Pointer to a function
+------------------------
+ 
+
+Requirement: Given two numbers, all math operations to be performed
+ 
+
+Shorten the process of working with delegate
+- Use Lambdas: =>
+- Syntax:
+          (n1, n2)=>{   var result = n1+n2;
+Console.WriteLine(result); 
+return ...
+                    }
+  The datatypes for return type and input type will be inferred from the delegate
+   void Compute(int n1, int n2)
+ 
+
+- Even shorter syntax
+  CASE: The logic inside the function is just 1 line of code.
+  ANS: No need to add the {}, no need of 'return' keyword
+ 
+
+  Eg: Assume, that delegate int Compute(int n1, int n2)
+      Hence
+            Compute objCompute = new Compute((a,b)=>a+b) //created a function + attached to delegate
+    objCompute += (n1,n2) => n1-n2
+ 
+
+ 
+
+- Even more shorter syntax
+  Usage of Generic delegate options
+ 
+
+  If delegate has a return type = void: Action<int,int> : <int,int> = input parameter datatypes
+  If delegate has a NON-VOID return type: Func<int,int,string>: Accepts 2 integer parameters & returns string
+  If delegate has a return type = boolean: Predicate<int> : <int>: Input parameter datatype
+ 
+
+USAGE:
+    Action<int,int> Compute = new Action<int,int>(()=>{})
+    Func<int, int, int> Compute2 = new Func<int,int,int>(()=>{})
+    Predicate<int> IsActive = new Predicate<int>(()=>{})
+ 
+
+Invocation:
+Compute(100,200);
+Compute2(100,200);
+IsActive(1);
+ed64141699631a35c232158b4272386f.png
+-----------------------------------------------------------------------------------------------------------
+Events
+Events are triggers which execute functions attached to them
+Eg: Click Event is attached to a function OnClick()
+ 
+
+Events have 3 parts to
+1. Declaration
+    Template: event <delegate> EventName;.
+2. Triggering or Invocation
+      - In the same class where the event is created add a TriggerEvent function with the following code
+       Eg: public void TriggerJoinEvent(){
+                          this.EventName.Invoke(params)
+              }
+ 
+
+3. Attaching functions
+    The functions can be attached from other classes also.
+     Eg: Employee kpmgEmp = new Employee();
+           kpmgEmp.EventName += functionName;
+----------------------------------------------------------------------
+For custom events, apart from above 3 steps,
+use a built-in event like Button Click event to trigger the custom event
+Eg: Button2_Click(object sender, EventArgs e)
+       {
+          //trigger custom event
+          TriggerJoinEvent()
+       }
+----------------------------------------------------------------------------------
+LAB 8 - Events Lab
+
+In EmpLib -> Employee.cs, create an event called Resign
+In Winforms App -> Attach 2 functions to the resign event
+In EmpLib -> Employee.cs, Add TriggerResignEvent()
+In Winforms App -> Add a new button->double-click to get the click method->call kpmgEmp.TriggerResignEvent()
+
+-------------------------------------------------------------------------------------------
+Creating utility classes and functions using static
+ 
+
+ public static void Log<T>(T[] pValues)
+        {
+            string result = "";
+            foreach (var item in pValues)
+            {
+                result = $"{result} {item}";
+            }
+
+            var finalResult = $"[ {DateTime.Now.ToString()} ] : {result}";
+            //Console Logging
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("----------");
+            Console.WriteLine(finalResult);
+
+            //Output Window
+            Debug.WriteLine("----- LOG ------");
+            Debug.WriteLine(finalResult);
+
+        }
+
+------------------------------------------------------------------
+LAB - 7 - OOPs
+STEPS
+
+1. Create a new solution folder: ShapeManager
+2. Create a new Class Library project: ShapeLib
+3. Create a new Console Project: ShapeConsole
+4. Add ShapeLib as Project Reference to  ShapeConsole
+
+ 
+
+ShapeLib should contain the following 
+
+interface IShape
+ Draw()
+ GetDetails()
+
+class abstract Paint
+  virtual CalculateArea(){}
+  abstract FillColor(string color)
+  override CalculateArea(), FillColor
+
+ 
+
+class Circle : IShape, Paint
+ radius 
+ implement Draw(), GetDetails()
+
+ 
+
+Rectangle : IShape, Paint
+ Length
+ Breadth
+ implement Draw(), GetDetails()
+ override CalculateArea(), FillColor
+
+----------------------------------------
+Shape Console
+
+Shape s1 = new Circle()
+Call all the functions and print the output
+
+Shape s2 = new Rectangle()
+Call all the functions and print the output
+
+ 
+
+ 
+
+Weekend Reading For OOPs
+https://www.w3schools.com/cs/cs_classes.php
+https://www.w3schools.com/cs/cs_class_members.php
+https://www.w3schools.com/cs/cs_constructors.php
+https://www.w3schools.com/cs/cs_access_modifiers.php
+https://www.w3schools.com/cs/cs_properties.php
+https://www.w3schools.com/cs/cs_inheritance.php
+https://www.w3schools.com/cs/cs_polymorphism.php
+https://www.w3schools.com/cs/cs_abstract.php
+https://www.w3schools.com/cs/cs_interface.php
+https://www.w3schools.com/cs/cs_enums.php
+ 
+
+OOPs 
+ 
+
+1. Class:
+    <access-specifier> class <ClassName> {}
+    Eg: public class Person{}
+ 
+
+2. Inheritance:
+<access-specifier> class <derived-class> : <base-class> {..}
+Eg:
+public class Employee : Person {..}
+3. Interfaces:
+<access-specifier> interface <interface-name> {.. }
+Eg:
+public IEmploymentContract { ... }
+ 
+
+4. Sign a contract = Implement an interface
+<access-specifier> class <class-name> : <interface-name> {...}
+Eg:
+public class Employee : IEmploymentContract { ... }
+ 
+
+Technically Using Polymorphism
+Using Virtual
+0. There should be atleast 2 classes in INHERITANCE relationshop
+1. Base class uses "virtual" to indicate a method / property "Logic" can be modified
+2. In the base class, the function will already have some logic
+
+ 
+
+Using Abstract
+0. There should be atleast 2 classes in INHERITANCE relationship
+1. If a function / property in a class is marked as abstract, the class should also be abstract
+2. Abstract classes cannot be instantiated
+3. Abstract class MUST be inherited in another normal class
+4. override keyword should be used to provide implementation to the abstract function / property
+
+ 
+
+Using Interfaces
+0. Contains only function definition, no access specifiers allowed, no logic allowed
+   Abstract clases, can contain normal functions + abstract functions (without logic)
+2. Interfaces are good alternative for Multiple Inheritance
+   Abstract classes cannot be used for Multiple Inheritance
+
+ 
+
+Using new - (Hack)
+0. This is for function hiding
+1. There should be atleast 2 classes in INHERITANCE relationship
+2. In the base class, the function will not have special keywords (virtual, abstract etc)
+3. In derived class the base class function will be re-defined with "new" as prefix
+
+ 
+
+--------------------------------------------
+Generics
+Create a generic function
+
+Syntax: <returnType> FnName<T>(params) { .. }
+
+Eg: void PrintValues<T>(List<T> pValues){ ... }
+
+------
+
+How to decide to use a generic function
+1. Create a normal function with params
+2. Take usecases. If the the parameters can be of more than one types or not
+3. If yes, create a generic function
+
+---------------------------------------------------------
+Recall
+ 
+
+1. dotnet command
+> dotnet new --list
+> dotnet new console --name FirstApp
+> dotnet new classlib --name MyClassLib
+> dotnet new webapp --name MyWebApp
+> dotnet new winforms --name WinApp
+ProjDir/> dotnet build
+ProjDir/> dotnet run
+> dotnet sln './SolutionName.sln' add '././FirstApp.csproj'
+> dotnet sln  './SOlutionName.sln' remove '././FirstApp.csproj'
+> dotnet add '././FirstApp.csproj' reference '././myClassLib.csproj'
+ 
+
+2. Working with Visual Studio
+> Program.cs [Startup file of the project]
+> Datatypes
+> Formatters: float: 100f, int: 100i, decimal: 100m, double: 100d
+> Grouping values in a variable
+> Arrays: int[] ints = new int[3];
+  int[] ints = {10,20,30};
+> Printing arrays: Must use Loops
+> while(condition){...}
+> do {...}while(condition)
+> for(int i=0;i<10;i++) {..}
+> foreach(int singleItem in ints){ ... }
+-- singleItem gives the value at the given position in the array
+--------------------------------------------------------------------------------------------------------------------------
+Reading Material:
+https://www.w3schools.in/csharp/constants
+https://www.w3schools.com/cs/cs_data_types.php
+https://www.w3schools.com/cs/cs_user_input.php
+https://www.w3schools.com/cs/cs_operators.php
+ 
+
+--------------------------------------------------------------------------------------------------------------------------
+For UK pax
+WorkingWithDataTypes();
+
+
+void WorkingWithDataTypes()
+{
+    Console.WriteLine("Hello, World!");
+    //Working with datatypes
+    int num1 = 100;
+    int num2 = 100;
+    Console.WriteLine("Sum = " + (num1 + num2));
+
+    //Declaration - alternate way
+    var num3 = 200;
+    var formattedFloat = 200f;
+    var formattedDouble = 200d;
+    var formattedDecimal = 200m;
+    Console.WriteLine(num3.GetType().Name);
+    Console.WriteLine(formattedFloat.GetType().Name);
+    Console.WriteLine(formattedDouble.GetType().Name);
+    Console.WriteLine(formattedDecimal.GetType().Name);
+
+    // Concatenation using String Interpolation: $
+    Console.WriteLine($"The datatype of num3 is {num3.GetType().Name}");
+
+    //other types
+    bool isEverythingOk = true;
+    string greetMessage = "Hello welcome to C# training session";
+    char iamSingle = 'S';
+
+    Console.WriteLine($"Value of {nameof(isEverythingOk)} is {isEverythingOk}");
+}
+
+------------------------------------------------------------------------------------------------------------------------
+
+LAB 6 - .Net core commands
+
+1. create a new project of type class library
+2. Add this project to the solution DemoApps
+3. Add this class library as reference to firstApp
+
+-------------------------------------------------------------------------------------------------------------------------
+.Net Platform
+ 
+
+Dotnet: A network of Technologies & Languages that interoperate through the Common Language Runtime called CLR
+
+It compiles all the languages into Intermediate Language (IL) code ~ Assembly Language
+Assembly Language is independant of platform.
+
+Hence .Net is platform independent
+
+ 
+
+1. Compilation -> CORE CLR (Ryu JIT) -> CORE FX -> Native Code (Binary)
+2. How to install / upgrade dotnet to a different version
+   > dot.net -> Click Downloads Link in Menu -> Click All versions
+   > Install required Runtime -> Correct CLR version (Eg: 6.0, 7.0 etc)
+      > If it is a digital device and only what to convert IL code to native code
+    > Only install .Net Runtime
+   > To create projects  in different technologies, need .net SDK.
+      > Consists of support for different technologies & provides Project Templates
+      > Also consists of Languages and compilers
+3. Installation of both Runtime and SDK is required.
+
+ 
+
+====================================================================
+CURSOR TEMPLATE
+ 
+
+OPEN c1
+
+-- STEP 3
+FETCH NEXT FROM c1
+INTO <variables-corresponding-to-columns-in-select-query>
+
+-- STEP 4
+-- YOUR LOGIC
+-- Use Conditions, loops, queries etc
+
+-- STEP 5
+CLOSE c1
+
+-- STEP 6
+DEALLOCATE c1
+
+-----------------------------------------------------------------------------------------------------------------
+Weekend Activity Lab
+ 
+
+Reading Activity: Total time: 20min
+Triggers: https://www.geeksforgeeks.org/sql-triggers/
+Cursors: https://www.mssqltips.com/sqlservertip/1599/cursor-in-sql-server/
+ 
+
+Practical Lab: Total time: 1hr
+Create the following 
+Database: Courses
+Tables
+ 1. Student
+       - StudentId INT PRIMARY KEY (Identity=true)
+       - StudentName NVARCHAR(50) NOT NULL
+       - InstituteId NVARCHAR(50) NOT NULL
+ 
+2. Course
+       - CourseId INT (Identity=true) PRIMARY KEY
+       - CourseName NVARCHAR(50)
+       - InstituteId INT NOT NULL
+       - DurationInWeeks INT NOT NULL
+3. Institute
+       - InstituteId INT (Identity = true) PRIMARY KEY
+       - InstituteName NVARCHAR(50) NOT NULL
+       - City NVARCHAR(50)
+ 
+
+4. StudentCourse
+       - StudentId INT PRIMARY KEY
+       - CourseId INT PRIMARY KEY
+       - JoiningDate DATETIME
+       - IsCompleted BIT
+ 
+
+Do the following
+Insert 5 students into Student table
+Insert 3 courses into Course Table
+Insert 2 Institutes into Institute Table
+Insert 10 records into Student Course Table
+Create the DB diagram
+ 
+
+Write the following Queries
+1. Get count of students grouped by Institute Name
+2.  Create a function to get total students in an institute. Here InstituteId is provided as the parameter
+3.  Create a view for: Getting all StudentNames and their matching courseNames, CourseDuration (*Hint: Use Joins)
+4. Write a transaction which has the following queries: Inserting a record into Student, Updating the Student Name, deleting the student. All of these queries should be enclosed inside a single transaction. (*Hint: Use BEGIN TRANSACTION ...... COMMIT)
+5. Create Stored Procedure for: Getting course details for a student. Here StudentId will be the parameter
+ 
+
+       - 
+--------------------------------------------------------------------------------------------------------------------------
+Reference for Queries
+ 
+
+https://github.com/sampradan-labs/SQL
+ 
+
+ 
+
+LAB 4
+Use JOINS (** Same table joined twice)
+Get All EmpNames and their Manager Names
+ 
+
+LAB 3
+ 
+
+- Create stored procedures for 
+- select all tasks for an empId
+- Get all tasks grouped by endDate
+- insert into EmpTasks
+- Update the dates for a given TaskId (params: TaskId, StartDate, EndDate) in Task table
+- Delete a task for an EmployeeId (Use Employee Tasks table)
+ 
+
+- Functions
+- Get Total tasks count for EmpId
+- Get Total Tasks that end on '12-18-2023'
+-----------------------------------------------------------------------------------------------------------------------
+VIEWS, Stored Procedures, Functions
+ 
+
+SYNTAXES:
+CREATE/ALTER VIEW <viewname> AS <select-query>
+CREATE/ALTER PROCEDURE <procedurename> @param INT... AS <query>
+CREATE/ALTER FUNCTION <functionname> (@params INT ....) RETURNS <datatype> AS <query>
+ 
+
+Execution Syntax:
+Views: SELECT * FROM <viewname>
+Stored Procedure: exec <spName> <params,...>
+Function: SELECT <functionName>(<params,..>)
+-------------------------------------------------------------------------------------------------------------------------
+GROUP BY
+ 
+
+Rules
+-- MUST have aggregation function in select 
+-- Must have atleast one other column that does not use aggregation function
+-- Eg: COUNT(T.[Name]) : Column that used aggregation function
+--     E.EmpName: One other column without aggregation function
+ 
+
+SELECT <normal column>,..,  <aggregate_column> FROM <table>
+GROUP BY <normal column,..> 
+HAVING <condition>
+ 
+
+ 
+
+JOINS
+3bebaf25fb9987a7e2725eac3a03625d.png
+ 
+
+------------------------------------------------------------------------------------------------------------------
+Reading material for LAB 1
+Basic Syntax: https://www.w3schools.com/sql/sql_syntax.asp
+SELECT syntax: https://www.w3schools.com/sql/sql_select.asp
+WHERE syntax: https://www.w3schools.com/sql/sql_where.asp
+ORDER BY syntax: https://www.w3schools.com/sql/sql_orderby.asp
+AND syntax: https://www.w3schools.com/sql/sql_and_or.asp
+OR syntax: https://www.w3schools.com/sql/sql_or.asp
+NOT syntax: https://www.w3schools.com/sql/sql_not.asp
+Wild Cards: https://www.w3schools.com/sql/sql_wildcards.asp
+ 
+
+ 
+
+LAB 1
+1. Add extra records (Around 5 more) to Task table
+2. Get all tasks that contain 'Coding' in it
+3. Get all tasks that end by end of October
+4. Get all tasks that start on the same day (Eg: 25-Oct-2023)
+
+5. Select tasks and display in format Task Name - starts on- StartDate - ends by- End Date
+Eg:Coding-starts on-2023-10-25 00:00:00.0-ends by-2023-10-30 00:00:00.0
+
+6. Select Tasks that start in October with Task name containing 'coding'
+
+ 
+
+-------------------------------------------------------------------------------------------------------------------------
+Example
+ 
+
+Task Management
+
+Task
+ Name - string - nvarchar
+ TaskId - int 
+ Start Date - datetime
+ End Date - datetime
+ IsSubmitted - bool - bit
+ IsComplete - bit
+
+Emp Tasks
+ EmpId - int + FKey + Candidate Key
+ TaskId - int + Fkey + Candidate Key
+ ModifyDate - datetime
+
+Employee
+ EmpId - int
+ EmpName - nvarchar
+ ManagerId - int
+ EmailId - nvarchar
+ DOJ - datetime
+ IsActive - bit
+
+ 
+
+---------------------------------------------------------------------------------------------------------
+Techniques to work with data
+ 
+
+1. SQL
+2. CLI
+3. XPath
+ 
+
+WE USE: SQL
+---------------------------
+Rules to handle data
+ 
+
+DDL - Data Definition Language
+- CREATE
+- ALTER
+- DROP
+- TRUNCATE
+ 
+
+DML - Data Manipulation Language
+- SELECT
+- INSERT
+- UPDATE
+- DELETE
+ 
+
+DCL - Data Control Language
+- GRANT
+- REVOKE
+ 
+
+DTL - Data TRANSACTION Language
+-Transaction
+-Commit
+-Rollback
